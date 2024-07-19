@@ -1,4 +1,5 @@
 from PIL import Image, ImageDraw, ImageFont
+from pathlib import Path
 
 # 画像のサイズを設定
 width, height = 800, 600
@@ -26,5 +27,6 @@ text_y = (height - text_height) / 2
 # テキストを画像に描画
 draw.text((text_x, text_y), text, font=font, fill=text_color)
 
-# 画像を保存
-image.save("test_image.png")
+# 絶対パスを指定して画像を保存
+absolute_path = Path("/Users/shigoto/仕事/GitHub/GenerateImage/Image/test_image.png")
+image.save(absolute_path)
