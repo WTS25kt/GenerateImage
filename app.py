@@ -1,5 +1,14 @@
-from PIL import Image, ImageDraw, ImageFont
+import os
 from pathlib import Path
+from dotenv import load_dotenv
+from PIL import Image, ImageDraw, ImageFont
+
+# .envファイルを読み込む
+load_dotenv()
+
+# 環境変数からパスを取得
+font_path = os.getenv('FONT_PATH')
+save_path = os.getenv('IMAGE_SAVE_PATH')
 
 # 画像のサイズを設定
 width, height = 800, 600
@@ -11,7 +20,7 @@ draw = ImageDraw.Draw(image)
 
 # フォントとサイズを設定
 font_size = 150
-font = ImageFont.truetype("arial.ttf", font_size)
+font = ImageFont.truetype(font_path, font_size)
 
 # テキストを設定
 text = "test"
@@ -28,5 +37,4 @@ text_y = (height - text_height) / 2
 draw.text((text_x, text_y), text, font=font, fill=text_color)
 
 # 絶対パスを指定して画像を保存
-absolute_path = Path("/Users/shigoto/仕事/GitHub/GenerateImage/Image/test_image.png")
-image.save(absolute_path)
+image.save(Path(save_path))
