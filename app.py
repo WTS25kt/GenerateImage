@@ -26,8 +26,10 @@ font = ImageFont.truetype(font_path, font_size)
 text = "test"
 text_color = (0, 0, 0)  # 黒色のテキスト
 
-# テキストのサイズを取得
-text_width, text_height = draw.textsize(text, font=font)
+# テキストのバウンディングボックスを取得
+text_bbox = draw.textbbox((0, 0), text, font=font)
+text_width = text_bbox[2] - text_bbox[0]
+text_height = text_bbox[3] - text_bbox[1]
 
 # テキストの位置を計算
 text_x = (width - text_width) / 2
@@ -37,4 +39,5 @@ text_y = (height - text_height) / 2
 draw.text((text_x, text_y), text, font=font, fill=text_color)
 
 # 絶対パスを指定して画像を保存
-image.save(Path(save_path))
+absolute_path = Path(save_path)
+image.save(absolute_path)
